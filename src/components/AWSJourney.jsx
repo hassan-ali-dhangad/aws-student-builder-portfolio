@@ -1,5 +1,6 @@
-const deploymentUrl = "https://main.dz2lui1b3aqps.amplifyapp.com";
-const repositoryUrl = "https://github.com/hassan-ali-dhangad/amplify-test";
+const deploymentUrl = "https://main.dcuvgztlc3l04.amplifyapp.com";
+const repositoryUrl =
+  "https://github.com/hassan-ali-dhangad/aws-student-builder-portfolio";
 
 const journeySteps = [
   {
@@ -132,7 +133,7 @@ export default function AWSJourney() {
                   rel="noreferrer"
                   className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-slate-950 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 dark:bg-white dark:text-slate-950 dark:hover:bg-slate-200"
                 >
-                  Visit live deployment
+                  Go live
                   <ExternalLinkIcon />
                 </a>
 

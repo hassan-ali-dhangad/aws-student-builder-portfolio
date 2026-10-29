@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 
 const questions = [
@@ -27,7 +26,8 @@ const questions = [
       "GitHub hosts repositories and tracks code changes. It can be connected to Amplify for a deployment workflow.",
   },
   {
-    question: "In a GitHub-connected Amplify project, what can happen after a push to a configured branch?",
+    question:
+      "In a GitHub-connected Amplify project, what can happen after a push to a configured branch?",
     options: [
       "The repository is deleted",
       "The app must always be rebuilt by hand",
@@ -49,6 +49,67 @@ const questions = [
     answer: 3,
     explanation:
       "Keep credentials secret and grant only the permissions required for the task.",
+  },
+  {
+    question: "What does the AWS pay-as-you-go pricing model mean?",
+    options: [
+      "You pay a fixed yearly fee no matter what you use",
+      "You pay only for the resources and services you actually use",
+      "You must buy servers before using AWS",
+      "You pay only when your website has errors",
+    ],
+    answer: 1,
+    explanation:
+      "Pay-as-you-go is a core cloud benefit: no large upfront cost, and you are billed for what you consume.",
+  },
+  {
+    question:
+      "Which AWS service is designed for scalable object storage, such as images, backups, and static files?",
+    options: ["Amazon EC2", "Amazon VPC", "Amazon S3", "AWS IAM"],
+    answer: 2,
+    explanation:
+      "Amazon S3 (Simple Storage Service) stores objects in buckets and is highly durable and scalable.",
+  },
+  {
+    question:
+      "Under the AWS Shared Responsibility Model, who is responsible for the security 'of' the cloud (physical data centers, hardware)?",
+    options: [
+      "AWS",
+      "The customer",
+      "The customer's internet provider",
+      "Nobody, it is shared equally",
+    ],
+    answer: 0,
+    explanation:
+      "AWS secures the infrastructure; customers are responsible for security 'in' the cloud, such as data, access, and configuration.",
+  },
+  {
+    question:
+      "Which AWS service lets you manage users, roles, and permissions for accessing AWS resources?",
+    options: ["Amazon CloudWatch", "Amazon Route 53", "AWS Lambda", "AWS IAM"],
+    answer: 3,
+    explanation:
+      "AWS Identity and Access Management (IAM) controls who can access which resources and what they can do.",
+  },
+  {
+    question: "What is an AWS Availability Zone?",
+    options: [
+      "A billing category for free-tier accounts",
+      "One or more discrete data centers within an AWS Region",
+      "A type of EC2 instance",
+      "A security group rule",
+    ],
+    answer: 1,
+    explanation:
+      "Regions contain multiple Availability Zones. Spreading resources across them improves fault tolerance and availability.",
+  },
+  {
+    question:
+      "Which AWS service runs your code without you provisioning or managing servers?",
+    options: ["Amazon RDS", "AWS Budgets", "AWS Lambda", "Amazon EBS"],
+    answer: 2,
+    explanation:
+      "AWS Lambda is a serverless compute service: you upload code and AWS runs it on demand, charging per use.",
   },
 ];
 
