@@ -246,9 +246,10 @@ export default function App() {
             href="#home"
             className="flex items-center gap-3 font-bold tracking-tight"
           >
-            <span className="grid h-10 w-10 place-items-center rounded-xl bg-slate-950 text-sm text-white dark:bg-white dark:text-slate-950">
+            <img src="logo1.png" alt="logo" />
+            {/* <span className="grid h-10 w-10 place-items-center rounded-xl bg-slate-950 text-sm text-white dark:bg-white dark:text-slate-950">
               H
-            </span>
+            </span> */}
             <span>
               Hassan Ali<span className="ml-2 text-blue-600"></span>
             </span>
