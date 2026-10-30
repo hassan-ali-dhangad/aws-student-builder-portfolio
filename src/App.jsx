@@ -1,7 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
+import confetti from "canvas-confetti";
 import AWSJourney from "./components/AWSJourney";
 import BuilderJourney from "./components/BuilderJourney";
 import MiniChallenge from "./components/MiniChallenge";
+import { Cat, Rat } from "lucide-react";
 
 const projects = [
   {
@@ -70,6 +72,11 @@ const commands = {
     "achievements — Learning milestones",
     "mission      — My purpose",
     "contact      — How to reach me",
+    "matrix       — Enter the Matrix mode",
+    "sudo hire    — [SECRET] Hire Hassan! (Triggers confetti)",
+    "aws-status   — Check cloud deployment status",
+    "chase        — [FUN] Watch the cat chase the rat around the terminal!",
+    "quote        — Daily developer motivation",
     "clear        — Clear the terminal",
   ].join("\n"),
 
@@ -95,6 +102,20 @@ const commands = {
 
   contact:
     "You can connect with me through GitHub or email. Scroll to the Contact section.",
+
+  matrix:
+    "01001000 01000001 01010011 01010011 01010001 01001110\n10110101 11001010 01101001 10101010 01100101 10101011\n[SYSTEM]: Matrix override activated... 🟢",
+
+  "sudo hire":
+    "🎉 [ACCESS GRANTED]: Congratulations! You have successfully hired Hassan Ali. Expect clean code, fast deployments, and dedication!",
+
+  "aws-status":
+    "⚡ AWS Amplify Hosting: ONLINE \n🌍 Region: us-east-1 (Global Edge) \n🚀 Status: 99.9% Uptime \n🔒 SSL Certificate: Active & Secure",
+
+  chase:
+    "🐱 ─── 🏃 🐭 \n[ANIMATION]: Cat is chasing the rat across the terminal boundaries! Quick, type code before they crash!",
+
+  quote: "“Simplicity is the soul of efficiency.” – Austin Freeman",
 };
 
 function getInitialDark() {
@@ -102,9 +123,7 @@ function getInitialDark() {
     const saved = localStorage.getItem("theme");
     if (saved === "dark") return true;
     if (saved === "light") return false;
-  } catch {
-    /* storage unavailable */
-  }
+  } catch {}
   return window.matchMedia?.("(prefers-color-scheme: dark)").matches ?? false;
 }
 
@@ -130,6 +149,14 @@ function Terminal() {
       return;
     }
 
+    if (command === "sudo hire" || command === "celebrate") {
+      confetti({
+        particleCount: 120,
+        spread: 80,
+        origin: { y: 0.6 },
+      });
+    }
+
     setHistory((items) => [
       ...items,
       {
@@ -144,63 +171,102 @@ function Terminal() {
   };
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-slate-700 bg-slate-950 shadow-2xl shadow-blue-950/20">
-      <div className="flex items-center gap-2 border-b border-slate-800 px-4 py-3">
-        <span className="h-3 w-3 rounded-full bg-rose-400" />
-        <span className="h-3 w-3 rounded-full bg-amber-300" />
-        <span className="h-3 w-3 rounded-full bg-emerald-400" />
-        <span className="ml-2 font-mono text-xs text-slate-400">
-          hassan@portfolio: ~
-        </span>
+    <div className="relative mt-10">
+      <style>{`
+        @keyframes runAround {
+          0% { top: -38px; left: -4%; }   
+          25% { top: -38px; left: 98%; } 
+          50% { top: 99%; left: 98%; }  
+          75% { top: 99%; left: -4%; }  
+          100% { top: -38px; left: -4%; } 
+        }
+        .chase-animation {
+          animation: runAround 8s linear infinite;
+        }
+      `}</style>
+
+      <div
+        className="absolute chase-animation z-30 pointer-events-none select-none text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.8)] transition-all"
+        style={{ animationDelay: "3s" }}
+      >
+        <Rat className="w-8 h-8 stroke-[2.5]" />
       </div>
-      <div className="min-h-44 space-y-3 p-5 font-mono text-sm">
-        {history.map((item, index) => (
-          <div key={`${item.command}-${index}`}>
-            {item.command && (
-              <p className="text-emerald-300">
-                <span className="text-blue-300">$</span> {item.command}
-              </p>
-            )}
-            <p className="mt-1 whitespace-pre-wrap leading-6 text-slate-300">
-              {item.output}
-            </p>
-          </div>
-        ))}
-        <form onSubmit={runCommand} className="flex items-center gap-2">
-          <label htmlFor="terminal-command" className="text-emerald-300">
-            $
-          </label>
-          <input
-            id="terminal-command"
-            value={value}
-            onChange={(event) => setValue(event.target.value)}
-            className="min-w-0 flex-1 bg-transparent text-white outline-none placeholder:text-slate-600"
-            placeholder="type a command..."
-            autoComplete="off"
-          />
-          <button
-            className="rounded-lg bg-blue-500 px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-blue-400"
-            type="submit"
-          >
-            Run
-          </button>
-        </form>
+
+      <div
+        className="absolute chase-animation z-30 pointer-events-none select-none text-amber-400 drop-shadow-[0_0_8px_rgba(251,191,36,0.8)] transition-all"
+        style={{ animationDelay: "0s" }}
+      >
+        <Cat className="w-8 h-8 stroke-[2.5]" />
       </div>
-      <p className="border-t border-slate-800 px-5 py-3 text-xs text-slate-500">
-        Hint: try{" "}
-        {["help", "aws", "journey", "contact"].map((cmd, i, arr) => (
-          <span key={cmd}>
-            <button
-              className="text-blue-300 hover:text-blue-200 cursor-pointer "
-              onClick={() => setValue(cmd)}
-              type="button"
-            >
-              {cmd}
-            </button>
-            {i < arr.length - 2 ? ", " : i === arr.length - 2 ? ", or " : "."}
+
+      <div className="overflow-hidden rounded-2xl border border-slate-700 bg-slate-950 shadow-2xl shadow-blue-950/20 relative">
+        <div className="flex items-center gap-2 border-b border-slate-800 px-4 py-3">
+          <span className="h-3 w-3 rounded-full bg-rose-400" />
+          <span className="h-3 w-3 rounded-full bg-amber-300" />
+          <span className="h-3 w-3 rounded-full bg-emerald-400" />
+          <span className="ml-2 font-mono text-xs text-slate-400">
+            hassan@portfolio: ~ (cat & rat zone)
           </span>
-        ))}
-      </p>
+        </div>
+        <div className="min-h-44 space-y-3 p-5 font-mono text-sm">
+          {history.map((item, index) => (
+            <div key={`${item.command}-${index}`}>
+              {item.command && (
+                <p className="text-emerald-300">
+                  <span className="text-blue-300">$</span> {item.command}
+                </p>
+              )}
+              <p className="mt-1 whitespace-pre-wrap leading-6 text-slate-300">
+                {item.output}
+              </p>
+            </div>
+          ))}
+          <form onSubmit={runCommand} className="flex items-center gap-2">
+            <label htmlFor="terminal-command" className="text-emerald-300">
+              $
+            </label>
+            <input
+              id="terminal-command"
+              value={value}
+              onChange={(event) => setValue(event.target.value)}
+              className="min-w-0 flex-1 bg-transparent text-white outline-none placeholder:text-slate-600"
+              placeholder="type a command (e.g. chase)..."
+              autoComplete="off"
+            />
+            <button
+              className="rounded-lg bg-blue-500 px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-blue-400 cursor-pointer"
+              type="submit"
+            >
+              Run
+            </button>
+          </form>
+        </div>
+        <p className="border-t border-slate-800 px-5 py-3 text-xs text-slate-500 flex items-center gap-2">
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+          </span>
+          <span>
+            Hint: try{" "}
+            {["help", "chase", "sudo hire", "aws-status"].map((cmd, i, arr) => (
+              <span key={cmd}>
+                <button
+                  className="text-blue-300 hover:text-emerald-400 underline decoration-dotted cursor-pointer font-bold transition"
+                  onClick={() => setValue(cmd)}
+                  type="button"
+                >
+                  {cmd}
+                </button>
+                {i < arr.length - 2
+                  ? ", "
+                  : i === arr.length - 2
+                    ? ", or "
+                    : "."}
+              </span>
+            ))}
+          </span>
+        </p>
+      </div>
     </div>
   );
 }
@@ -227,15 +293,12 @@ export default function App() {
   const [dark, setDark] = useState(getInitialDark);
   const year = useMemo(() => new Date().getFullYear(), []);
 
-  // Apply the theme to <html> so Tailwind's `.dark` variant and color-scheme work everywhere
   useEffect(() => {
     const root = document.documentElement;
     root.classList.toggle("dark", dark);
     try {
       localStorage.setItem("theme", dark ? "dark" : "light");
-    } catch {
-      /* storage unavailable */
-    }
+    } catch {}
   }, [dark]);
 
   return (
@@ -246,10 +309,7 @@ export default function App() {
             href="#home"
             className="flex items-center gap-3 font-bold tracking-tight"
           >
-            <img src="logo1.png" alt="logo" />
-            {/* <span className="grid h-10 w-10 place-items-center rounded-xl bg-slate-950 text-sm text-white dark:bg-white dark:text-slate-950">
-              H
-            </span> */}
+            <img src="logo1.png" alt="logo" className="h-8 w-8" />
             <span>
               Hassan Ali<span className="ml-2 text-blue-600"></span>
             </span>
@@ -268,7 +328,7 @@ export default function App() {
           <button
             type="button"
             onClick={() => setDark((current) => !current)}
-            className="rounded-full border border-slate-200 px-3 py-2 text-xs font-semibold transition hover:border-blue-500 hover:text-blue-600 dark:border-slate-700 dark:hover:text-blue-400"
+            className="rounded-full border border-slate-200 px-3 py-2 text-xs font-semibold transition hover:border-blue-500 hover:text-blue-600 dark:border-slate-700 dark:hover:text-blue-400 cursor-pointer"
             aria-label="Toggle dark mode"
             aria-pressed={dark}
           >
@@ -278,7 +338,6 @@ export default function App() {
       </header>
 
       <main>
-        
         <section id="home" className="relative isolate overflow-hidden">
           <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-100 via-white to-white dark:from-blue-950/60 dark:via-slate-950 dark:to-slate-950" />
           <div className="mx-auto grid max-w-6xl gap-12 px-5 py-20 sm:py-28 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:px-8 lg:py-32">
@@ -405,9 +464,10 @@ export default function App() {
             </div>
           </div>
         </section>
-        <AWSJourney />
 
+        <AWSJourney />
         <BuilderJourney />
+
         <section
           id="projects"
           className="bg-slate-50 py-20 dark:bg-slate-900/50"
@@ -456,6 +516,7 @@ export default function App() {
             </div>
           </div>
         </section>
+
         <MiniChallenge />
 
         <section id="contact" className="px-5 py-20 lg:px-8">
