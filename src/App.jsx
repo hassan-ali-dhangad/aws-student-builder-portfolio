@@ -117,14 +117,13 @@ const commands = {
 
   quote: "“Simplicity is the soul of efficiency.” – Austin Freeman",
 };
-
 function getInitialDark() {
   try {
     const saved = localStorage.getItem("theme");
     if (saved === "dark") return true;
     if (saved === "light") return false;
   } catch {}
-  return window.matchMedia?.("(prefers-color-scheme: dark)").matches ?? false;
+  return true;
 }
 
 function Terminal() {
