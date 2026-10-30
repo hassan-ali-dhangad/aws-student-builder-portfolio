@@ -186,19 +186,17 @@ function Terminal() {
       `}</style>
 
       <div
-        className="absolute chase-animation z-30 pointer-events-none select-none text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.8)] transition-all"
-        style={{ animationDelay: "3s" }}
-      >
-        <Rat className="w-8 h-8 stroke-[2.5]" />
-      </div>
-
-      <div
         className="absolute chase-animation z-30 pointer-events-none select-none text-amber-400 drop-shadow-[0_0_8px_rgba(251,191,36,0.8)] transition-all"
+        style={{ animationDelay: "0.8s" }}
+      >
+        <Cat className="w-9 h-9 stroke-[2.5]" />
+      </div>
+      <div
+        className="absolute chase-animation z-30 pointer-events-none select-none text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.8)] transition-all"
         style={{ animationDelay: "0s" }}
       >
-        <Cat className="w-8 h-8 stroke-[2.5]" />
+        <Rat className="w-9 h-9 stroke-[2.5]" />
       </div>
-
       <div className="overflow-hidden rounded-2xl border border-slate-700 bg-slate-950 shadow-2xl shadow-blue-950/20 relative">
         <div className="flex items-center gap-2 border-b border-slate-800 px-4 py-3">
           <span className="h-3 w-3 rounded-full bg-rose-400" />
