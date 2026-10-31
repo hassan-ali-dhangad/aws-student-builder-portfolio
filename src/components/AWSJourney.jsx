@@ -78,7 +78,6 @@ export default function AWSJourney() {
           </p>
         </div>
 
-        {/* Main deployment card */}
         <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900">
           <div className="grid lg:grid-cols-[1.15fr_0.85fr]">
             <div className="p-6 sm:p-9 lg:p-10">
@@ -149,7 +148,6 @@ export default function AWSJourney() {
               </div>
             </div>
 
-            {/* Deployment workflow */}
             <div className="border-t border-slate-200 bg-slate-50 p-6 dark:border-slate-800 dark:bg-slate-950/60 sm:p-9 lg:border-l lg:border-t-0 lg:p-10">
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
                 Deployment workflow
@@ -203,7 +201,6 @@ export default function AWSJourney() {
           </div>
         </div>
 
-        {/* Learning outcomes */}
         <div className="mt-12">
           <h3 className="text-xl font-bold text-slate-950 dark:text-white">
             What I am learning

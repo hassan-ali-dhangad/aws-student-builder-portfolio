@@ -1,6 +1,5 @@
 @import "tailwindcss";
 
-/* Tailwind v4: make `dark:` follow the `.dark` class instead of the OS setting */
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
@@ -18,7 +17,7 @@
 }
 
 :root.dark {
-  color-scheme: light;
+  color-scheme: dark;
 }
 
 html {
