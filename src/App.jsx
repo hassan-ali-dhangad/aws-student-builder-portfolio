@@ -177,6 +177,7 @@ function Terminal() {
             className="min-w-0 flex-1 bg-transparent text-white outline-none placeholder:text-slate-600"
             placeholder="type a command..."
             autoComplete="off"
+            autoFocus
           />
           <button
             className="rounded-lg bg-blue-500 px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-blue-400"
